@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
-
+import React, { useState, useEffect } from 'react'
+import api from './services/api';
 import './App.css';
-import backgroundImage from './assets/background.jpg'
 
 import Header from './components/Headers';
 
@@ -19,6 +18,12 @@ function App() {
     //1. Variável com o seu valor inicial
     //2. Função para atualizarmos esse valor
 
+    useEffect(() => {
+        api.get('/projects').then(response => {
+            console.log(useEffect)
+        });
+    }, []);
+
     function handleAddProject(){
         // projects.push(`Novo projeto${Date.now()}`)
 
@@ -31,7 +36,6 @@ function App() {
         <>
             <Header title="Projects"/>
 
-            <img width={2000} src={backgroundImage} alt="" />
 
             <ul>
                 {projects.map(project => <li key={project}>{project}</li>)}
